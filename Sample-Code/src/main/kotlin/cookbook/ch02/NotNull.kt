@@ -9,7 +9,7 @@
  */
 
 fun main() {
-    var name: String
+    var name: String //null을 넣을 수 없는 타입
     name = "Solar"
 //    name = null //null을 넣을 수 없다.
     println("name is ${name}")

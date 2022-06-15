@@ -20,3 +20,19 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+//그레이들에서 JSR-305 호환성 강제하기
+sourceCompatibility = 1.11
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.11"
+        freeCompilerArgs = ["-Xjsr305=strict"]
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.11"
+        freeCompilerArgs = ["-Xjsr305=strict"]
+    }
+}
