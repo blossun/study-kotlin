@@ -3,7 +3,7 @@ fun whatToDo(dayOfWeek: Any) = when (dayOfWeek) {
     in listOf("Monday", "Tuesday", "Wednesday", "Thursday") -> "Work hard"
     in 2..4 -> "Work hard"
     "Friday" -> "Party"
-    is String -> "What?"
+    is String -> "What, you provided a string of length ${dayOfWeek.length}" //스마트캐스
     else -> "No Clue"
 }
 
