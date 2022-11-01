@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class) //방법2. json 네이밍이 스네이크케이스라는 것을 클래스에 명시한다.
+//@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class) //방법2. json 네이밍이 스네이크케이스라는 것을 클래스에 명시한다.
 data class UserRequest(
     var name: String? = null,
     var age: Int? = null,
