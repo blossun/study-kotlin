@@ -1,9 +1,14 @@
 package dev.solar.mvc.controller.delete
 
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 @RestController
 @RequestMapping("/api")
+@Validated //유효성검사를 하는 어노테이션이 동작하게 된다. 어노테이션은 bean을 검증한다. _age와 같은 변수는 bean이 아니기떄문에 이렇게 설정을 추가해줘야 동작하게 된다.
 class DeleteApiController {
 
     // 1. path variable
@@ -12,6 +17,9 @@ class DeleteApiController {
     @DeleteMapping(path = ["/delete-mapping"])
     fun deleteMapping(
         @RequestParam(value = "name") _name: String,
+
+        @NotNull(message = "age 값이 누락되었습니다.")
+        @Min(value = 20, message = "age는 20보다 커야 합니다.")
         @RequestParam(value = "age") _age: Int
     ): String {
         println(_name)
@@ -21,7 +29,14 @@ class DeleteApiController {
 
     //localhost:8080/api/delete-mapping/name/solar/age/28
     @DeleteMapping(path = ["/delete-mapping/name/{name}/age/{age}"])
-    fun deleteMappingPath(@PathVariable(value = "name") _name: String, @PathVariable(name = "age") _age: Int): String {
+    fun deleteMappingPath(@PathVariable(value = "name")
+                          @Size(min = 2, max = 5, message = "name의 길이는 2~5")
+                          @NotNull
+                          _name: String,
+
+                          @NotNull(message = "age 값이 누락되었습니다.")
+                          @Min(value = 20, message = "age는 20보다 커야 합니다.")
+                          @PathVariable(name = "age") _age: Int): String {
         println(_name)
         println(_age)
         return _name + " " + _age
