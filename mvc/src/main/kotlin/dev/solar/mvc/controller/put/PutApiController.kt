@@ -77,9 +77,10 @@ class PutApiController {
     }
     /**
      * === validate 체크 response ===
-     * validCreatedAt : 생성일자의 패턴은 yyyy-MM-dd HH:mm:ss 여야 합니다.
+     * //(제외됨) validCreatedAt : 생성일자의 패턴은 yyyy-MM-dd HH:mm:ss 여야 합니다.
      * name : 크기가 2에서 8 사이여야 합니다
      * email : 올바른 형식의 이메일 주소여야 합니다
+     * createdAt : 패턴이 올바르지 않습니다.
      * age : 0 이상이어야 합니다
      */
 }

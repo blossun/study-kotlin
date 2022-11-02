@@ -3,6 +3,7 @@ package dev.solar.mvc.model.http
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
+import dev.solar.mvc.annotation.StringFormatDateTime
 import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -28,15 +29,16 @@ data class UserRequest(
     @field:Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}\$") // 정규표현식 검증
     var phoneNumber: String? = null, //kotlin은 변수명을 카멜케이스를 컨벤션으로한다. 반면 rest-api는 스네이크케이스로 넘어오는 경우가 많다. phone_number
 
+    @field:StringFormatDateTime(pattern = "yyyy-MM-dd HH:mm:ss", message = "패턴이 올바르지 않습니다.")
     var createdAt: String? = null // yyyy-MM-dd HH:mm:ss ex) 2022-11-02 13:00:00
 ) {
-    @AssertTrue(message = "생성일자의 패턴은 yyyy-MM-dd HH:mm:ss 여야 합니다.") //검증할 떄 아래 메소드가 실행될 수 있도록 어노테이션 추가
-    private fun isValidCreatedAt(): Boolean { //정상 -> true, 비정상 -> false
-        return try {
-            LocalDateTime.parse(this.createdAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
+//    @AssertTrue(message = "생성일자의 패턴은 yyyy-MM-dd HH:mm:ss 여야 합니다.") //검증할 떄 아래 메소드가 실행될 수 있도록 어노테이션 추가
+//    private fun isValidCreatedAt(): Boolean { //정상 -> true, 비정상 -> false
+//        return try {
+//            LocalDateTime.parse(this.createdAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+//            true
+//        } catch (e: Exception) {
+//            false
+//        }
+//    }
 }
