@@ -1,0 +1,29 @@
+package dev.solar.mvc.controller.delete
+
+import org.springframework.web.bind.annotation.*
+
+@RestController
+@RequestMapping("/api")
+class DeleteApiController {
+
+    // 1. path variable
+    // 2. request param
+
+    @DeleteMapping(path = ["/delete-mapping"])
+    fun deleteMapping(
+        @RequestParam(value = "name") _name: String,
+        @RequestParam(value = "age") _age: Int
+    ): String {
+        println(_name)
+        println(_age)
+        return _name + " " + _age
+    }
+
+    //localhost:8080/api/delete-mapping/name/solar/age/28
+    @DeleteMapping(path = ["/delete-mapping/name/{name}/age/{age}"])
+    fun deleteMappingPath(@PathVariable(value = "name") _name: String, @PathVariable(name = "age") _age: Int): String {
+        println(_name)
+        println(_age)
+        return _name + " " + _age
+    }
+}
