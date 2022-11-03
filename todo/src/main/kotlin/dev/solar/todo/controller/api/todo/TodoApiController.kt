@@ -2,6 +2,9 @@ package dev.solar.todo.controller.api.todo
 
 import dev.solar.todo.model.http.TodoDto
 import dev.solar.todo.service.TodoService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,6 +12,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
+@Tag(description = "일정 관리", name = "일정관리 애플리케이션")
 @RestController
 @RequestMapping("/api/todos")
 @Validated
@@ -17,8 +21,12 @@ class TodoApiController(
 ) {
 
     //Read
+    @Operation(summary = "일정 확인", description = "일정 확인 GET API")
     @GetMapping
-    fun read(@RequestParam(required = false) index: Int?): ResponseEntity<Any?> {
+    fun read(
+        @Parameter(name = "index")
+        @RequestParam(required = false) index: Int?
+    ): ResponseEntity<Any?> {
         return index?.let {                 //index가 있으면 단건 조회
             todoService.read(it)
         }?.let {

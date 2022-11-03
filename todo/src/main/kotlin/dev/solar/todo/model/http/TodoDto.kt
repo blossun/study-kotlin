@@ -1,6 +1,7 @@
 package dev.solar.todo.model.http
 
 import dev.solar.todo.database.Todo
+import io.swagger.v3.oas.annotations.media.Schema
 import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -8,14 +9,48 @@ import javax.validation.constraints.AssertTrue
 import javax.validation.constraints.NotBlank
 
 data class TodoDto(
+
+    @field:Schema(
+        description = "DB INDEX",
+        example = "1",
+        required = false
+    )
     var index: Int? = null,
+
+    @field:Schema(
+        name = "일정명",
+        example = "일정 관리",
+        required = true
+    )
     @field:NotBlank
     var title: String? = null,
+
+    @field:Schema(
+        name = "일정 설명",
+        example = "13시 쿠차라",
+        required = false
+    )
     var description: String? = null,
+
+    @field:Schema(
+        name = "시간",
+        example = "2022-11-02 13:00:00",
+        required = true
+    )
     @field:NotBlank
     // yyyy-MM-dd HH:mm:ss
     var schedule: String? = null,
+
+    @field:Schema(
+        name = "생성 일자",
+        required = false
+    )
     var createdAt: LocalDateTime? = null,
+
+    @field:Schema(
+        name = "수정 일자",
+        required = false
+    )
     var updatedAt: LocalDateTime? = null
 ) {
     //TODO 이전에 학습했던 custom annotation으로 변경
