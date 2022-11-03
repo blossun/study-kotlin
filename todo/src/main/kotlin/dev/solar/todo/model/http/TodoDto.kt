@@ -1,5 +1,6 @@
 package dev.solar.todo.model.http
 
+import dev.solar.todo.database.Todo
 import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -14,7 +15,7 @@ data class TodoDto(
     @field:NotBlank
     // yyyy-MM-dd HH:mm:ss
     var schedule: String? = null,
-    val createdAt: LocalDateTime? = null,
+    var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
 ) {
     //TODO 이전에 학습했던 custom annotation으로 변경
@@ -27,5 +28,17 @@ data class TodoDto(
             false
         }
 
+    }
+}
+
+//Todo를 TodoDto 변환해주는 확장함수 추가
+fun TodoDto.convertTodoDto(todo: Todo): TodoDto {
+    return TodoDto().apply {
+        this.index = todo.index
+        this.title = todo.title
+        this.description = todo.description
+        this.schedule = todo.schedule?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        this.createdAt = todo.createdAt
+        this.updatedAt = todo.updatedAt
     }
 }
