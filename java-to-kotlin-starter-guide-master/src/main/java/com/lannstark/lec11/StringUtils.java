@@ -2,11 +2,11 @@ package com.lannstark.lec11;
 
 public abstract class StringUtils {
 
-  private StringUtils() {}
+    private StringUtils() {}
 
-  public boolean isDirectoryPath(String path) {
-    return path.endsWith("/");
-  }
+    public boolean isDirectoryPath(String path) {
+        return path.endsWith("/");
+    }
 
 }
 
